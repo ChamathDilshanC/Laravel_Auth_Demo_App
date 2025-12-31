@@ -26,3 +26,11 @@ Route::get('/dashboard', function () {
 
 // Logout Route
 Route::get('/logout', [App\Http\Controllers\SignInController::class, 'logout']);
+
+// Todo Routes
+Route::get('/todos', [App\Http\Controllers\TodoController::class, 'index']);
+Route::get('/todos/create', [App\Http\Controllers\TodoController::class, 'create']);
+Route::post('/todos', [App\Http\Controllers\TodoController::class, 'store']);
+Route::get('/todos/{id}/edit', [App\Http\Controllers\TodoController::class, 'edit']);
+Route::put('/todos/{id}', [App\Http\Controllers\TodoController::class, 'update']);
+Route::delete('/todos/{id}', [App\Http\Controllers\TodoController::class, 'destroy']);
