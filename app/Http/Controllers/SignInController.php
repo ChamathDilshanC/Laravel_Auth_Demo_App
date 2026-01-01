@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\SignUp;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
@@ -29,7 +29,7 @@ class SignInController extends Controller
         ]);
 
         // Find the user by email
-        $user = SignUp::where('email', $credentials['email'])->first();
+        $user = User::where('email', $credentials['email'])->first();
 
         // Check if user exists and password matches
         if ($user && Hash::check($credentials['password'], $user->password)) {

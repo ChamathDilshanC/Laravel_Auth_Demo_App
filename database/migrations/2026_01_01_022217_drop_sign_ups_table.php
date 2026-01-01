@@ -11,13 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sign_ups', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-        });
+        Schema::dropIfExists('sign_ups');
     }
 
     /**
@@ -25,6 +19,13 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sign_ups');
+        // Recreate the table if rolled back
+        Schema::create('sign_ups', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password');
+        });
     }
 };

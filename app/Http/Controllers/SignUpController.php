@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SignUp;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -32,22 +31,15 @@ class SignUpController extends Controller
         // Validate the incoming request
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:sign_ups,email|unique:users,email',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
         // Hash the password
         $validated['password'] = bcrypt($validated['password']);
 
-        // Create the user in sign_ups table
-        SignUp::create($validated);
-
-        // Create the user in users table as well
-        User::create([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
-            'password' => $validated['password'],
-        ]);
+        // Create the user in users table
+        User::create($validated);
 
         // Redirect with success message
         return redirect('/signin')->with('success', 'Account created successfully! You can now sign in.');
@@ -56,7 +48,7 @@ class SignUpController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(SignUp $signUp)
+    public function show(User $user)
     {
         //
     }
@@ -64,7 +56,7 @@ class SignUpController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SignUp $signUp)
+    public function edit(User $user)
     {
         //
     }
@@ -72,7 +64,7 @@ class SignUpController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, SignUp $signUp)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -80,7 +72,7 @@ class SignUpController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SignUp $signUp)
+    public function destroy(User $user)
     {
         //
     }
