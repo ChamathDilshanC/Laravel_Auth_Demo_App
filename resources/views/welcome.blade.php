@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>TaskFlow - Transform Your Productivity</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -17,31 +17,62 @@
         body {
             font-family: 'Inter', sans-serif;
         }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+
+        .pulse-glow {
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
     </style>
 </head>
-<body class="antialiased">
-    <!-- Main Container with Soft Blue Radial Background -->
-    <div class="min-h-screen w-full bg-white relative overflow-hidden">
-        <!-- Soft Blue Radial Background -->
+<body class="antialiased" style="background: #000000;">
+    <!-- Main Container with Dark Background -->
+    <div class="min-h-screen w-full relative" style="background: #000000;">
+        <!-- Dark Noise Colored Background -->
         <div
             class="absolute inset-0 z-0"
             style="
-                background: #ffffff;
-                background-image: radial-gradient(circle at top center, rgba(59, 130, 246, 0.5), transparent 70%);
+                background: #000000;
+                background-image:
+                    radial-gradient(circle at 1px 1px, rgba(139, 92, 246, 0.2) 1px, transparent 0),
+                    radial-gradient(circle at 1px 1px, rgba(59, 130, 246, 0.18) 1px, transparent 0),
+                    radial-gradient(circle at 1px 1px, rgba(236, 72, 153, 0.15) 1px, transparent 0);
+                background-size: 20px 20px, 30px 30px, 25px 25px;
+                background-position: 0 0, 10px 10px, 15px 5px;
             "
         ></div>
 
+        <!-- Gradient Overlays for Depth -->
+        <div class="absolute inset-0 z-0">
+            <div class="absolute top-0 left-1/4 w-96 h-96 rounded-full blur-3xl pulse-glow" style="background: rgba(59, 59, 227, 0.15);"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl pulse-glow" style="background: rgba(59, 59, 227, 0.12); animation-delay: 1s;"></div>
+        </div>
+
         <!-- Navigation Bar -->
-        <nav class="relative z-20 bg-white/80 backdrop-blur-md shadow-sm">
+        <nav class="relative z-20 backdrop-blur-xl border-b" style="background: rgba(0, 0, 0, 0.4); border-color: rgba(255, 255, 255, 0.1);">
             <div class="max-w-7xl mx-auto px-6 py-4">
                 <div class="flex items-center justify-between">
                     <!-- Logo -->
                     <div class="flex items-center">
-                        <a href="/" class="flex items-center space-x-2">
-                            <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
-                                <span class="text-white font-bold text-xl">A</span>
+                        <a href="/" class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg" style="background: #3b3be3; box-shadow: 0 10px 15px -3px rgba(59, 59, 227, 0.5);">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+                                </svg>
                             </div>
-                            <span class="text-xl font-bold text-gray-900">AuthDemo</span>
+                            <span class="text-2xl font-bold text-white">TaskFlow</span>
                         </a>
                     </div>
 
@@ -49,15 +80,20 @@
                     <div class="flex items-center space-x-4">
                         <a
                             href="/signin"
-                            class="px-6 py-2.5 text-gray-700 font-semibold hover:text-blue-600 transition-colors"
+                            class="px-6 py-2.5 font-semibold transition-all duration-300" style="color: rgba(255, 255, 255, 0.7);"
+                            onmouseover="this.style.color='#ffffff'"
+                            onmouseout="this.style.color='rgba(255, 255, 255, 0.7)'"
                         >
                             Sign In
                         </a>
                         <a
                             href="/signup"
-                            class="px-6 py-2.5 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300 hover:shadow-lg hover:scale-105"
+                            class="px-6 py-2.5 text-white font-semibold rounded-xl transition-all duration-300 hover:scale-105"
+                            style="background: #3b3be3; box-shadow: 0 20px 25px -5px rgba(59, 59, 227, 0.5);"
+                            onmouseover="this.style.boxShadow='0 25px 50px -12px rgba(59, 59, 227, 0.5)'"
+                            onmouseout="this.style.boxShadow='0 20px 25px -5px rgba(59, 59, 227, 0.5)'"
                         >
-                            Sign Up
+                            Get Started Free
                         </a>
                     </div>
                 </div>
@@ -69,17 +105,20 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <!-- Left Content -->
                 <div class="space-y-8">
-                    <div class="space-y-4">
-                        <p class="text-blue-600 font-semibold text-lg uppercase tracking-wide">
-                            Elevate Your Development
-                        </p>
-                        <h1 class="text-5xl lg:text-7xl font-bold text-gray-900 leading-tight">
-                            Experience The
-                            <span class="text-blue-600">Magic</span>
-                            Of Laravel!
+                    <div class="space-y-6">
+                        <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full" style="background: rgba(59, 59, 227, 0.1); border: 1px solid rgba(59, 59, 227, 0.2);">
+                            <span class="w-2 h-2 rounded-full animate-pulse" style="background: #3b3be3;"></span>
+                            <p class="font-semibold text-sm uppercase tracking-wide" style="color: #3b3be3;">
+                                Master Your Tasks
+                            </p>
+                        </div>
+                        <h1 class="text-6xl lg:text-7xl font-black text-white leading-tight">
+                            Organize Your
+                            <span class="block" style="color: #3b3be3;">TaskFlow</span>
+                            Productively.
                         </h1>
-                        <p class="text-xl text-gray-600 max-w-xl">
-                            Build something amazing with Laravel. The PHP framework for web artisans, designed to make development a breeze.
+                        <p class="text-xl max-w-xl leading-relaxed" style="color: rgba(255, 255, 255, 0.6);">
+                            The ultimate task management solution that adapts to your workflow. Capture, organize, and conquer your to-dos with elegant simplicity.
                         </p>
                     </div>
 
@@ -87,16 +126,22 @@
                     <div class="flex flex-col sm:flex-row gap-4">
                         <a
                             href="/signup"
-                            class="inline-flex items-center justify-center px-8 py-4 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition-all duration-300 hover:shadow-xl hover:scale-105"
+                            class="group inline-flex items-center justify-center px-8 py-4 text-white font-bold rounded-xl transition-all duration-300 hover:scale-105"
+                            style="background: #3b3be3; box-shadow: 0 20px 25px -5px rgba(59, 59, 227, 0.5);"
+                            onmouseover="this.style.boxShadow='0 25px 50px -12px rgba(59, 59, 227, 0.5)'"
+                            onmouseout="this.style.boxShadow='0 20px 25px -5px rgba(59, 59, 227, 0.5)'"
                         >
-                            Get Started Now
-                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            Get Signed Up
+                            <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                             </svg>
                         </a>
                         <a
                             href="#features"
-                            class="inline-flex items-center justify-center px-8 py-4 bg-white text-blue-600 font-semibold rounded-xl border-2 border-blue-600 hover:bg-blue-50 transition-all duration-300 hover:shadow-xl hover:scale-105"
+                            class="group inline-flex items-center justify-center px-8 py-4 text-white font-semibold rounded-xl border-2 transition-all duration-300 backdrop-blur-sm"
+                            style="background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.1);"
+                            onmouseover="this.style.background='rgba(255, 255, 255, 0.1)'; this.style.borderColor='rgba(59, 59, 227, 0.5)'"
+                            onmouseout="this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(255, 255, 255, 0.1)'"
                         >
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
@@ -108,88 +153,30 @@
 
                     <!-- Stats -->
                     <div class="flex items-center space-x-8 pt-8">
-                        <div class="flex -space-x-3">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 border-2 border-white"></div>
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 border-2 border-white"></div>
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-pink-400 to-pink-600 border-2 border-white"></div>
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 border-2 border-white"></div>
-                        </div>
                         <div>
-                            <p class="text-sm font-semibold text-gray-900">Join 10,000+ developers</p>
-                            <p class="text-sm text-gray-600">Building amazing applications</p>
+                            <p class="text-sm font-bold text-white">50,000+ productive users</p>
+                            <p class="text-sm" style="color: rgba(255, 255, 255, 0.6);">Completing 1M+ tasks daily</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Right Image/Illustration -->
-                <div class="relative">
-                    <div class="relative bg-gradient-to-br from-blue-100 to-blue-50 rounded-3xl p-8 shadow-2xl">
-                        <div class="absolute -top-4 -right-4 w-24 h-24 bg-blue-600 rounded-2xl opacity-20 blur-2xl"></div>
-                        <div class="absolute -bottom-4 -left-4 w-32 h-32 bg-purple-600 rounded-2xl opacity-20 blur-2xl"></div>
-
-                        <!-- Hero Image -->
-                        <div class="relative bg-white rounded-2xl p-8 shadow-lg overflow-hidden">
-                            <div class="flex items-center justify-center h-80">
-                                <img
-                                    src="https://i.pinimg.com/1200x/70/3c/43/703c4340446d7a139a42fa4d25925b26.jpg"
-                                    alt="Hero Image"
-                                    class="w-full h-full object-cover rounded-xl"
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Features Section -->
-        <div id="features" class="relative z-10 max-w-7xl mx-auto px-6 py-20">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-4">Why Choose Laravel?</h2>
-                <p class="text-xl text-gray-600">Everything you need to build modern web applications</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Feature 1 -->
-                <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-blue-100">
-                    <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-6">
-                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Fast & Modern</h3>
-                    <p class="text-gray-600 leading-relaxed">Built with the latest technologies for optimal performance and developer experience.</p>
-                </div>
-
-                <!-- Feature 2 -->
-                <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-blue-100">
-                    <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mb-6">
-                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Secure</h3>
-                    <p class="text-gray-600 leading-relaxed">Enterprise-grade security features to protect your application and user data.</p>
-                </div>
-
-                <!-- Feature 3 -->
-                <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-blue-100">
-                    <div class="w-14 h-14 bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl flex items-center justify-center mb-6">
-                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Customizable</h3>
-                    <p class="text-gray-600 leading-relaxed">Flexible and easy to customize to fit your specific project requirements.</p>
+                <!-- Right Illustration/Preview -->
+                <div class="relative float-animation">
+                    <img
+                        src="{{ asset('images/task-preview.png') }}"
+                        alt="Task Preview"
+                        class="w-full h-auto rounded-3xl shadow-2xl"
+                        style="max-width: 600px;"
+                    />
                 </div>
             </div>
         </div>
 
         <!-- Footer -->
-        <footer class="relative z-10 bg-gray-900 text-white mt-20">
+        <footer class="relative z-10 backdrop-blur-xl border-t mt-20" style="background: rgba(0, 0, 0, 0.4); border-color: rgba(255, 255, 255, 0.1);">
             <div class="max-w-7xl mx-auto px-6 py-12">
                 <div class="text-center">
-                    <p class="text-gray-400">&copy; 2025 LaravelApp. All rights reserved.</p>
+                    <p style="color: rgba(255, 255, 255, 0.6);">&copy; 2026 TaskFlow. Elevate your productivity, one task at a time.</p>
                 </div>
             </div>
         </footer>
