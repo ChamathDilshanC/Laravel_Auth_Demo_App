@@ -18,10 +18,4 @@ class Todo extends Model
     protected $casts = [
         'due_date' => 'date',
     ];
-
-    // Relationship to user
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
 }
