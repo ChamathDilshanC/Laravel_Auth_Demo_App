@@ -34,6 +34,12 @@ return new class extends Migration
             $table->text('user_agent')->nullable();
             $table->longText('payload');
             $table->integer('last_activity')->index();
+
+            // Foreign key constraint - user එකක් delete වුනාම එයාගේ sessions ටික automatically delete වෙනවා
+            $table->foreign('user_id')
+                  ->references('id')
+                  ->on('users')
+                  ->onDelete('cascade');
         });
     }
 

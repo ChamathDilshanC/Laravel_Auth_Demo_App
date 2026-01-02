@@ -126,6 +126,17 @@
             </div>
         </div>
 
+        <!-- Delete Account Section - Account එක delete කරන්න form එකක් use කරනවා -->
+        <div class="mb-4">
+            <form action="{{ route('delete-user') }}" method="POST" onsubmit="return confirm('Are you sure you want to delete your account? This will permanently delete all your todos as well. This action cannot be undone!');">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="px-4 py-2 bg-red-600 text-white text-sm font-semibold rounded-lg hover:bg-red-700 transition-all duration-300">
+                    Delete Account {{ Session::get('user_name', 'User') }}
+                </button>
+            </form>
+        </div>
+
         <!-- Info Section -->
         <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-8 border border-blue-100">
             <h2 class="text-2xl font-bold text-gray-900 mb-4">Account Information</h2>

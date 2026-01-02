@@ -90,8 +90,14 @@
 
             <!-- Form -->
             <form action="/todos/{{ $todo->id }}" method="POST" class="p-6">
+                <!--Automatically hidden input field එකක් generate කරනවා CSRF token එක සමඟ-->
+                {{-- <input type="hidden" name="_token" value="random_csrf_token_here"> --}}
                 @csrf
+
                 @method('PUT')
+                <!--HTML forms වලට PUT/DELETE methods support නැති නිසා Laravel මේ method spoofing technique එක use කරනවා
+                මේක hidden field එකක් add කරනවා-->
+                {{-- <input type="hidden" name="_method" value="PUT"> --}}
 
                 <!-- Title Field -->
                 <div class="mb-6">

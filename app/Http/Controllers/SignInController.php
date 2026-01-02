@@ -55,4 +55,29 @@ class SignInController extends Controller
         Session::flush();
         return redirect('/')->with('success', 'You have been logged out successfully.');
     }
+
+    /**
+     * Delete the currently authenticated user account
+     * ලොග් වෙලා ඉන්න user account එක delete කරනවා (todos ටික foreign key නිසා automatically delete වෙනවා)
+     */
+    public function destroy()
+    {
+        // Get currently logged in user ID from session
+        $userId = Session::get('user_id');
+
+        if (!$userId) {
+            return redirect('/signin')->with('error', 'You must be logged in to delete your account.');
+        }
+
+        // Find and delete the user (cascade will delete all related todos)
+        $user = User::find($userId);
+
+        if ($user) {
+            $user->delete(); // මේ user delete වෙද්දී ඒ user ගේ සියලු todos automatically delete වෙනවා (cascade)
+            Session::flush(); // Clear session
+            return redirect('/signin')->with('success', 'Account deleted successfully!');
+        }
+
+        return redirect('/dashboard')->with('error', 'Failed to delete account.');
+    }
 }

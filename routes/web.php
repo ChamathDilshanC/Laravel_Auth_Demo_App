@@ -34,3 +34,6 @@ Route::post('/todos', [App\Http\Controllers\TodoController::class, 'store']);
 Route::get('/todos/{id}/edit', [App\Http\Controllers\TodoController::class, 'edit']);
 Route::put('/todos/{id}', [App\Http\Controllers\TodoController::class, 'update']);
 Route::delete('/todos/{id}', [App\Http\Controllers\TodoController::class, 'destroy']);
+
+// Delete User Route
+Route::delete('/delete-user', [App\Http\Controllers\SignInController::class, 'destroy'])->name('delete-user');

@@ -37,10 +37,13 @@ class User extends Authenticatable
      * Get the attributes that should be cast.
      *
      * @return array<string, string>
+     * මේ method එක Laravel එකට කියනවා database එකේ තියෙන data විවිධ data types වලට කොහොමද convert කරන්නේ කියලා.
      */
     protected function casts(): array
     {
         return [
+            // Email verify වුන දිනය සහ වේලාව database එකේ තියෙන හැටියෙන් DateTime object එකක් බවට convert කරනවා
+            // Password එක database එකට save කරද්දී automatically hash කරනවා
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
