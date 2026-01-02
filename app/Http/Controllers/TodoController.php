@@ -9,6 +9,14 @@ use Illuminate\Support\Facades\Session;
 
 class TodoController extends Controller
 {
+    /**
+     * Get the authenticated user using Eloquent
+     */
+    private function getAuthenticatedUser()
+    {
+        return User::findOrFail(Session::get('user_id'));
+    }
+
     // Display all todos for the authenticated user
     public function index()
     {
@@ -16,7 +24,9 @@ class TodoController extends Controller
             return redirect('/signin')->with('error', 'Please sign in first.');
         }
 
-        $user = User::find(Session::get('user_id'));
+        $user = $this->getAuthenticatedUser();
+
+        // Using Eloquent relationship - cleaner and more efficient
         $todos = $user->todos;
 
         return view('todos.index', compact('todos'));
@@ -47,9 +57,10 @@ class TodoController extends Controller
             'due_date' => 'nullable|date',
         ]);
 
-        $validated['user_id'] = Session::get('user_id');
+        $user = $this->getAuthenticatedUser();
 
-        Todo::create($validated);
+        // Using Eloquent relationship method - automatically sets user_id
+        $user->todos()->create($validated);
 
         return redirect('/todos')->with('success', 'Todo created successfully!');
     }
@@ -61,9 +72,10 @@ class TodoController extends Controller
             return redirect('/signin')->with('error', 'Please sign in first.');
         }
 
-        $todo = Todo::where('id', $id)
-            ->where('user_id', Session::get('user_id'))
-            ->firstOrFail();
+        $user = $this->getAuthenticatedUser();
+
+        // Using Eloquent relationship with whereBelongsTo - more semantic
+        $todo = Todo::whereBelongsTo($user)->findOrFail($id);
 
         return view('todos.edit', compact('todo'));
     }
@@ -75,9 +87,10 @@ class TodoController extends Controller
             return redirect('/signin')->with('error', 'Please sign in first.');
         }
 
-        $todo = Todo::where('id', $id)
-            ->where('user_id', Session::get('user_id'))
-            ->firstOrFail();
+        $user = $this->getAuthenticatedUser();
+
+        // Using Eloquent relationship method - ensures user owns the todo
+        $todo = $user->todos()->findOrFail($id);
 
         $validated = $request->validate([
             'title' => 'required|string|max:255',
@@ -87,6 +100,7 @@ class TodoController extends Controller
             'due_date' => 'nullable|date',
         ]);
 
+        // Using Eloquent update method
         $todo->update($validated);
 
         return redirect('/todos')->with('success', 'Todo updated successfully!');
@@ -99,10 +113,12 @@ class TodoController extends Controller
             return redirect('/signin')->with('error', 'Please sign in first.');
         }
 
-        $todo = Todo::where('id', $id)
-            ->where('user_id', Session::get('user_id'))
-            ->firstOrFail();
+        $user = $this->getAuthenticatedUser();
 
+        // Using Eloquent relationship method - ensures user owns the todo
+        $todo = $user->todos()->findOrFail($id);
+
+        // Using Eloquent delete method
         $todo->delete();
 
         return redirect('/todos')->with('success', 'Todo deleted successfully!');
