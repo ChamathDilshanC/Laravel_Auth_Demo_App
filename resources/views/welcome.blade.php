@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>TaskFlow - Transform Your Productivity</title>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -67,11 +70,7 @@
                     <!-- Logo -->
                     <div class="flex items-center">
                         <a href="/" class="flex items-center space-x-3">
-                            <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg" style="background: #3b3be3; box-shadow: 0 10px 15px -3px rgba(59, 59, 227, 0.5);">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
-                                </svg>
-                            </div>
+                            <img src="{{ asset('images/logo.png') }}" alt="TaskFlow Logo" class="w-10 h-10 rounded-xl shadow-lg" style="box-shadow: 0 10px 15px -3px rgba(59, 59, 227, 0.5);">
                             <span class="text-2xl font-bold text-white">TaskFlow</span>
                         </a>
                     </div>

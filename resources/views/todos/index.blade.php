@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>My Todos - {{ config('app.name', 'Laravel') }}</title>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,9 +30,7 @@
                 <!-- Logo -->
                 <div class="flex items-center space-x-6">
                     <a href="/dashboard" class="flex items-center space-x-2">
-                        <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
-                            <span class="text-white font-bold text-xl">T</span>
-                        </div>
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-10 h-10 rounded-lg">
                         <span class="text-xl font-bold text-gray-900">TodoApp</span>
                     </a>
                     <div class="flex items-center space-x-1 ml-4">
