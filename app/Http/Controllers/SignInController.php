@@ -24,7 +24,7 @@ class SignInController extends Controller
     {
         // Validate the credentials
         $credentials = $request->validate([
-            'email' => 'required|email',
+            'email' => 'required|email', // email එක required සහ valid email format එකක් විය යුතුයි
             'password' => 'required',
         ]);
 

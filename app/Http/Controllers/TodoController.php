@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Todo;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -15,9 +16,8 @@ class TodoController extends Controller
             return redirect('/signin')->with('error', 'Please sign in first.');
         }
 
-        $todos = Todo::where('user_id', Session::get('user_id'))
-            ->orderBy('created_at', 'desc')
-            ->get();
+        $user = User::find(Session::get('user_id'));
+        $todos = $user->todos;
 
         return view('todos.index', compact('todos'));
     }
